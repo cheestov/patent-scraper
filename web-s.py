@@ -35,7 +35,7 @@ userAgents = ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.67 Safari/537.36",
 "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.67 Safari/537.36",
 "Mozilla/5.0 (X11; OpenBSD i386) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"]
-agent = random.choice(userAgents)
+agent = random.choice(userAgents)  # this is used to get past the webscraping protections. I tell the browser im 30 different users instead of 1
 
 service = Service()
 options = webdriver.ChromeOptions()
@@ -46,6 +46,10 @@ driver.get("https://ppubs.uspto.gov/pubwebapp/external.html?q=2012.fy.") # searc
 
 
 sleep(6)
+chwd = driver.window_handles
+driver.switch_to.window(chwd[1])
+sleep(0.9)
+
 content = driver.page_source
 soup = BeautifulSoup(content)
 for a in soup.findAll('div', attrs={'class':'slick-cell l9 r9 left'}):
