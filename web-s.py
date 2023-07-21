@@ -18,6 +18,9 @@ def scrapePatents(driver):
         for a in soup.findAll('div', attrs={'class':'slick-cell l9 r9 left'}):
             pNumber=a.find('button', attrs={'class':'results-key-cntrl btn-link'})
             pNumbers.append(pNumber.text)
+            print(pNumber.text)
+            print(a['id'])
+            driver.find_element(By.ID, a['id']).click()
         for i in range(3):
             driver.execute_script('arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;', inner_window)
         scroll += 1
@@ -35,13 +38,15 @@ agent = random.choice(lines).strip()
 print(agent)
 service = Service()
 options = webdriver.ChromeOptions()
-#options.add_argument("user-agent={}".format(agent))
+options.add_argument("user-agent={}".format(agent))
 #options.add_argument('--proxy-server=198.199.70.20:31028')
+#options.add_argument('--proxy-server=154.65.39.7:80')
 driver = webdriver.Chrome(service=service, options=options)  # object used to interact with chrome
 
 driver.get("https://ppubs.uspto.gov/pubwebapp/external.html?q=2013.fy.") # search results for patents files in 2012
 
 #switches to correct window in database
+driver.maximize_window()
 sleep(6)
 chwd = driver.window_handles
 driver.switch_to.window(chwd[1])
