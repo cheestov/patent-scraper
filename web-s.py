@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 
 def scrapePatents(driver):
     pNumbers = []   # for storing patent numbers
+    states = []     # for storing state info of patent
     #scrolls through results window and grabs the patent# from shown results
     # change number in while header to get more or less results.
     inner_window = driver.find_element(By.CLASS_NAME, "slick-viewport")
@@ -21,6 +22,8 @@ def scrapePatents(driver):
             print(pNumber.text)
             print(a['id'])
             driver.find_element(By.ID, a['id']).click()
+            sleep(20)
+
         for i in range(3):
             driver.execute_script('arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;', inner_window)
         scroll += 1
