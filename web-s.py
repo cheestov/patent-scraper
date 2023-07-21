@@ -6,8 +6,24 @@ import pandas as pd
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
+def scrapePatents(driver):
+    pNumbers = []   # for storing patent numbers
+    #scrolls through results window and grabs the patent# from shown results
+    # change number in while header to get more or less results.
+    inner_window = driver.find_element(By.CLASS_NAME, "slick-viewport")
+    scroll = 0
+    while scroll < 60:  # this will scroll 3 times
+        content = driver.page_source
+        soup = BeautifulSoup(content)
+        for a in soup.findAll('div', attrs={'class':'slick-cell l9 r9 left'}):
+            pNumber=a.find('button', attrs={'class':'results-key-cntrl btn-link'})
+            pNumbers.append(pNumber.text)
+        for i in range(3):
+            driver.execute_script('arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;', inner_window)
+        scroll += 1
+        sleep(.65)
 
-pNumbers = []   # for storing patent numbers
+    return pNumbers
 
 filename = "user-agent-list.txt"
 lines = []
@@ -31,20 +47,8 @@ chwd = driver.window_handles
 driver.switch_to.window(chwd[1])
 sleep(0.9)
 
-#scrolls through results window and grabs the patent# from shown results
-# change number in while header to get more or less results.
-inner_window = driver.find_element(By.CLASS_NAME, "slick-viewport")
-scroll = 0
-while scroll < 60:  # this will scroll 3 times
-    content = driver.page_source
-    soup = BeautifulSoup(content)
-    for a in soup.findAll('div', attrs={'class':'slick-cell l9 r9 left'}):
-        pNumber=a.find('button', attrs={'class':'results-key-cntrl btn-link'})
-        pNumbers.append(pNumber.text)
-    for i in range(3):
-        driver.execute_script('arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;', inner_window)
-    scroll += 1
-    sleep(.65)
+pNumbers = scrapePatents(driver)
+
 
 # removes duplicates due to inefficiant scrolling
 pNumbers = [*set(pNumbers)]
@@ -55,3 +59,6 @@ df.to_csv('products.csv', index=False, encoding='utf-8')
 
 
 driver.quit()
+
+
+
