@@ -23,12 +23,20 @@ def scrapePatents(driver):
             print(a['id'])
             driver.find_element(By.ID, a['id']).click()
             sleep(20)
-
+            state=soup.find('div', attrs={'class':'item-row item-block meta-assigneeInfoGroup'})
+            if state == None:
+                continue
+            state=state.find('div', attrs={'class':'item item-2 item-2-lg'})
+            state=state.find('div', attrs={'class':'meta-col'})
+            state = state.text
+            print(state)
+            states.append(state)
         for i in range(3):
             driver.execute_script('arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;', inner_window)
         scroll += 1
         sleep(.65)
 
+    print(states)
     return pNumbers
 
 filename = "user-agent-list.txt"
