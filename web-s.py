@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from FCS import fcitations
 
 def scrapePatents(driver):
     pNumbers = []   # for storing patent numbers
@@ -13,7 +14,7 @@ def scrapePatents(driver):
     # change number in while header to get more or less results.
     inner_window = driver.find_element(By.CLASS_NAME, "slick-viewport")
     scroll = 0
-    while scroll < 2:  # this will scroll 3 times
+    while scroll < 1:  # this will scroll 3 times
         content = driver.page_source
         soup = BeautifulSoup(content)
         for a in soup.findAll('div', attrs={'class':'slick-cell l9 r9 left'}):
@@ -71,11 +72,12 @@ pNumbers_states = scrapePatents(driver)
 pNumbers = pNumbers_states[0]
 states = pNumbers_states[1]
 
+citations = fcitations(driver, pNumbers)
 # removes duplicates due to inefficiant scrolling
 #pNumbers = [*set(pNumbers)]
 
 # pack it all into a csv using pandas
-df = pd.DataFrame({'Patent #':pNumbers, 'Assignee State':states}) 
+df = pd.DataFrame({'Patent #':pNumbers, 'Assignee State':states, 'Forward Citations':citations}) 
 df.to_csv('products.csv', index=False, encoding='utf-8')
 
 
