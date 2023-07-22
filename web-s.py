@@ -14,7 +14,7 @@ def scrapePatents(driver):
     # change number in while header to get more or less results.
     inner_window = driver.find_element(By.CLASS_NAME, "slick-viewport")
     scroll = 0
-    while scroll < 1:  # this will scroll 3 times
+    while scroll < 30:  # this will scroll 3 times
         content = driver.page_source
         soup = BeautifulSoup(content)
         for a in soup.findAll('div', attrs={'class':'slick-cell l9 r9 left'}):
@@ -58,7 +58,7 @@ options = webdriver.ChromeOptions()
 #options.add_argument('--proxy-server=154.65.39.7:80')
 driver = webdriver.Chrome(service=service, options=options)  # object used to interact with chrome
 
-driver.get("https://ppubs.uspto.gov/pubwebapp/external.html?q=2007.fy.") # search results for patents files in 2012
+driver.get("https://ppubs.uspto.gov/pubwebapp/external.html?q=2002.fy.") # search results for patents files in 2012
 
 #switches to correct window in database
 driver.maximize_window()
