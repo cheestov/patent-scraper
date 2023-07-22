@@ -17,7 +17,7 @@ agent = random.choice(lines).strip()
 print(agent)
 service = Service()
 options = webdriver.ChromeOptions()
-#options.add_argument("user-agent={}".format(agent))
+options.add_argument("user-agent={}".format(agent))
 #options.add_argument('--proxy-server=198.199.70.20:31028')
 #options.add_argument('--proxy-server=154.65.39.7:80')
 driver = webdriver.Chrome(service=service, options=options)  # object used to interact with chrome
