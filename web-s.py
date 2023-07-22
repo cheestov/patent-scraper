@@ -23,7 +23,7 @@ def scrapePatents(driver):
             print(pNumber.text)
             print(a['id'])
             driver.find_element(By.ID, a['id']).click()
-            sleep(20)
+            sleep(30)
             content2 = driver.page_source
             soup2 = BeautifulSoup(content2)
             state=soup2.find('div', attrs={'class':'item-row item-block meta-assigneeInfoGroup'})
@@ -53,12 +53,12 @@ agent = random.choice(lines).strip()
 print(agent)
 service = Service()
 options = webdriver.ChromeOptions()
-options.add_argument("user-agent={}".format(agent))
+#options.add_argument("user-agent={}".format(agent))
 #options.add_argument('--proxy-server=198.199.70.20:31028')
 #options.add_argument('--proxy-server=154.65.39.7:80')
 driver = webdriver.Chrome(service=service, options=options)  # object used to interact with chrome
 
-driver.get("https://ppubs.uspto.gov/pubwebapp/external.html?q=2013.fy.") # search results for patents files in 2012
+driver.get("https://ppubs.uspto.gov/pubwebapp/external.html?q=2007.fy.") # search results for patents files in 2012
 
 #switches to correct window in database
 driver.maximize_window()
