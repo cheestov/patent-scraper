@@ -44,6 +44,13 @@ def scrapePatents(driver):
     inner_window = driver.find_element(By.CLASS_NAME, "slick-viewport")
     scroll = 0
     while scroll < 30:  # this will scroll 3 times
+
+
+        for i in range(100):
+            driver.execute_script('arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;', inner_window)
+            sleep(.70)
+
+
         content = driver.page_source
         soup = BeautifulSoup(content)
         for a in soup.findAll('div', attrs={'class':'slick-cell l9 r9 left'}):

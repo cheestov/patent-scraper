@@ -22,7 +22,7 @@ options.add_argument("user-agent={}".format(agent))
 #options.add_argument('--proxy-server=154.65.39.7:80')
 driver = webdriver.Chrome(service=service, options=options)  # object used to interact with chrome
 
-driver.get("https://ppubs.uspto.gov/pubwebapp/external.html?q=2002.fy.") # search results for patents files in 2012
+driver.get("https://ppubs.uspto.gov/pubwebapp/external.html?q=2019.fy.") # search results for patents files in 2012
 
 #switches to correct window in database
 driver.maximize_window()
