@@ -1,6 +1,6 @@
 # To-Do
 
-```
+### pre breakthrough notes
 - [ ] set up the collection of more variables for each patent
     - Variables that can be collected:
 
@@ -32,13 +32,13 @@
 
 Optional
 - [ ] CLI
-```
 
+--------------------------------------------------------------------------------------------------------------------------
 
 Minutess I need to clock: 35 + 27
 
 
-
+### Post break through notes
 A complete break through. From further research ive realized ive taken a completely wrong appraoch, as one often does. 
 https://ped.uspto.gov/peds/#/!/apiDoc
 allows for the bulk downloading into a JSON. file size of all patents from 2019 = ~40GB from 7000 patents = ~350MB
