@@ -45,10 +45,10 @@ def scrapePatents(driver):
     scroll = 0
     while scroll < 30:  # this will scroll 3 times
 
-
-        for i in range(100):
-            driver.execute_script('arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;', inner_window)
-            sleep(.70)
+        # This is for testing the scroll and what patents are available during the scrolling
+        #for i in range(100):
+         #   driver.execute_script('arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;', inner_window)
+          #  sleep(.70)
 
 
         content = driver.page_source
