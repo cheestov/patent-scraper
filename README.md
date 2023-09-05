@@ -5,12 +5,19 @@
     - Variables that can be collected:
 
     Patent number: _unique indentification number of each patent_
+    
     Kind code: _https://www.uspto.gov/patents/search/authority-files/uspto-kind-codes#:~:text=B1-,B1,or%20after%20January%202%2C%202001. (Working through what all of these mean and what their relevence could be.)_
+    
     CPC (A and I): _4 character code (Can include additional numbers identifying the subclass) that categorizes the invention e.g. 'fuel cell', 'metallurgic process'..._
+    
     Assignee: _company filing, their state_
+    
     publication date
+    
     patent length/pages
+    
     citations in patent
+    
     ?Forward citations? : _not readily available. Could be difficult to collect in a reasonable time span as the web scraping for this takes a while_
 
 
