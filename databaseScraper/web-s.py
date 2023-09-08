@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from FCS import fcitations, scrapePatents
+from databaseScraper.FCS import fcitations, scrapePatents
 
 filename = "user-agent-list.txt"
 lines = []
