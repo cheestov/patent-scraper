@@ -1,4 +1,5 @@
 import json
+from time import sleep
 import requests
 
 # use pandas to turn the JSON into a dataframe and then make it into a csv
@@ -34,7 +35,7 @@ myobj = {'somekey': 'somevalue'}
 #exit()
 
 
-postJSON = {"searchText":"",
+postJSON = {"searchText":"*:*",
 "fq":["appFilingDate:[2019-01-01T00:00:00Z TO 2019-01-01T23:59:59Z]"],
 "fl":"*",
 "mm":"100%",
@@ -51,16 +52,35 @@ print(queryOne.content)
 if queryOne.status_code != 200 :
     exit("Non-200 OK response.")
 
-initialJSON = queryOne.json()
-initialJSON_dict = json.load(initialJSON)
+#initialJSON = queryOne.json()
+#initialJSON_dict = json.load(initialJSON)
+initialDict = queryOne.json()
+print(type(initialDict))
+queryResult_dict = initialDict["queryResults"]
 
-queryResult_dict = initialJSON_dict['queryResults']
-
-firstQueryID = initialJSON_dict['queryId']
+firstQueryID = initialDict['queryId']
 responseQueryID = queryResult_dict['queryId']
 print(firstQueryID)
 print(responseQueryID)
 
+status = 400
+
+while (status != 200):
+    url = 'https://ped.uspto.gov/api/queries/{}'.format(firstQueryID)
+    queryStatus = requests.get(url, headers={'accept' : 'application/json'})
+
+    print(queryStatus.status_code)
+    print(queryStatus.content)
+
+    status = queryStatus.status_code
+    sleep(30)
+
+if queryStatus.status_code != 200 :
+    exit("Non-200 OK response.")
+
+statusDict = queryStatus.json()
+
+#while statusDict[]
 
 
 
