@@ -1,5 +1,7 @@
 # To-Do
 
+**you have an hour of untracked time**
+
 ### pre breakthrough notes
 - [ ] set up the collection of more variables for each patent
     - Variables that can be collected:
