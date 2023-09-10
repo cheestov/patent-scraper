@@ -11,7 +11,7 @@ def querymaker(year):
     variables = "patentIssueDate appLocationYear appEarlyPubNumber applId appLocation appType appStatus_txt appConfrNumber appCustNumber appGrpArtNumber appCls appSubCls appEntityStatus_txt patentNumber patentTitle primaryInventor firstNamedApplicant firstNamedApplicantNameList wipoEarlyPubNumber pctAppType firstInventorFile appClsSubCls rankAndInventorsList"
 
     query = {"searchText":"*:*",
-"fq":["appFilingDate:[2019-01-01T00:00:00Z TO 2019-01-01T23:59:59Z]"],
+"fq":["patentIssueDate:[2019-01-01T00:00:00Z TO 2019-01-01T23:59:59Z]"],
 "fl":"*",
 "mm":"100%",
 "df":"patentTitle",
@@ -24,7 +24,7 @@ def querymaker(year):
     return query
     
 def download_file(url):
-    local_filename = "resutsFile.zip"
+    local_filename = "resultsFile.zip"
     # NOTE the stream=True parameter below
     with requests.get(url, stream=True) as r:
         r.raise_for_status()
