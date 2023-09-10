@@ -3,129 +3,69 @@ import requests
 
 # use pandas to turn the JSON into a dataframe and then make it into a csv
 
-def queryMaker(year):
+# {"searchText":"","fq":["patentIssueDate:[2019-01-01T00:00:00Z TO 2019-01-01T23:59:59Z]"],"fl":"*","mm":"100%","df":"patentTitle","qf":"patentIssueDate appLocationYear appEarlyPubNumber applId appLocation appType appStatus_txt appConfrNumber appCustNumber appGrpArtNumber appCls appSubCls appEntityStatus_txt patentNumber patentTitle primaryInventor firstNamedApplicant wipoEarlyPubNumber pctAppType firstInventorFile appClsSubCls rankAndInventorsList","facet":"false","sort":"applId asc","start":"0"}
 
+def querymaker(year):
+    issueDate = "{}-01-01T00:00:00Z TO {}-01-01T23:59:59Z".format(year, year)
+    variables = "patentIssueDate appLocationYear appEarlyPubNumber applId appLocation appType appStatus_txt appConfrNumber appCustNumber appGrpArtNumber appCls appSubCls appEntityStatus_txt patentNumber patentTitle primaryInventor firstNamedApplicant firstNamedApplicantNameList wipoEarlyPubNumber pctAppType firstInventorFile appClsSubCls rankAndInventorsList"
 
+    query = json.dumps({"searchText":"",
+"fq":["appFilingDate:[2019-01-01T00:00:00Z TO 2019-01-01T23:59:59Z]"],
+"fl":"*",
+"mm":"100%",
+"df":"patentTitle",
+"qf":"patentIssueDate appLocationYear appEarlyPubNumber applId appLocation appType appStatus_txt appConfrNumber appCustNumber appGrpArtNumber appCls appSubCls appEntityStatus_txt patentNumber patentTitle primaryInventor firstNamedApplicant firstNamedApplicantNameList wipoEarlyPubNumber pctAppType firstInventorFile appClsSubCls rankAndInventorsList",
+"facet":"false",
+"sort":"applId asc",
+"start":"0"})
 
-postJSON = json.dumps(myQuery)
+   # query = json.dumps({"searchText":"firstNamedApplicant:(Google)","fq":["appFilingDate:[2013-01-01T00:00:00Z TO 2013-12-31T23:59:59Z]","appStatus:\"Patented Case\""],"fl":"*","mm":"100%","df":"patentTitle","qf":"appEarlyPubNumber applId appLocation appType appStatus_txt appConfrNumber appCustNumber appGrpArtNumber appCls appSubCls appEntityStatus_txt patentNumber patentTitle primaryInventor firstNamedApplicant appExamName appExamPrefrdName appAttrDockNumber appPCTNumber appIntlPubNumber wipoEarlyPubNumber pctAppType firstInventorFile appClsSubCls rankAndInventorsList","facet":"false","sort":"applId asc","start":"0"})
+    return query
+    
 
-url = 'https://www.w3schools.com/python/demopage.php'
+postJSON = querymaker("2019")
+print(postJSON)
+
+url = 'https://ped.uspto.gov/api/queries'
 myobj = {'somekey': 'somevalue'}
 
-x = requests.post(url, json = myobj)
-{"searchText":"","fq":["patentIssueDate:[2019-01-01T00:00:00Z TO 2019-01--1T23:59:59Z]"],"fl":"*","mm":"100%","df":"patentTitle","qf":"patentIssueDate appLocationYear appEarlyPubNumber applId appLocation appType appStatus_txt appConfrNumber appCustNumber appGrpArtNumber appCls appSubCls appEntityStatus_txt patentNumber patentTitle primaryInventor firstNamedApplicant wipoEarlyPubNumber pctAppType firstInventorFile appClsSubCls rankAndInventorsList","facet":"false","sort":"applId asc","start":"0"}
 
-{
-  "appTypeFacet": "string",
-  "applId": "string",
-  "totalPtoDays": "string",
-  "appFilingDate": "date",
-  "firstNamedApplicantAddress": "text_general",
-  "appLocationFacet": "string",
-  "appLocationDate": "date",
-  "inventorName": "text_general",
-  "appEarlyPubDate": "date",
-  "intlFilingYear": "int",
-  "appExamMdlName": "text_general",
-  "ptaPteType": "string",
-  "corrAddrNameLineTwo": "string",
-  "appLocation": "text_general",
-  "appEarlyPubNumber": "text_general",
-  "wipoEarlyPubDate": "date",
-  "id": "string",
-  "text": "text_general",
-  "appTransHistoryDate": "date",
-  "primaryInventorCity": "text_general",
-  "appExamLastName": "text_general",
-  "firstNamedApplicantNameList": "string",
-  "appPubyear": "text_general",
-  "appSubCls": "string",
-  "primaryInventorCountry": "text_general",
-  "patentNumberFacet": "string",
-  "appStatus": "string",
-  "corrAddrStreetLineTwo": "string",
-  "ptaPteInd": "string",
-  "corrAddrGeoRegionNA": "string",
-  "firstNamedApplicantAddressList": "string",
-  "firstInventorFileFacet": "string",
-  "cDelay": "string",
-  "appStatusDate": "date",
-  "appControlNumber": "string",
-  "ptoAdjustments": "string",
-  "firstInventorFile": "string",
-  "appGrpArtNumberFacet": "string",
-  "overlapDelay": "string",
-  "appType": "text_general",
-  "rankAndInventorsList": "text_general",
-  "appStatusYear": "int",
-  "primaryInventorMiddleName": "text_general",
-  "pctAppType": "text_general",
-  "appCustNumber": "int",
-  "lastUpdatedTimestamp": "date",
-  "firstNamedApplicantFacet": "string",
-  "wipoEarlyPubNumber": "text_general",
-  "appClsSubCls": "text_general",
-  "bDelay": "string",
-  "corrAddrNameLineOne": "string",
-  "firstNamedApplicant": "text_general",
-  "appExamFirstName": "text_general",
-  "patentNumberStr": "string",
-  "appPCTNumber": "text_general",
-  "corrAddrCountryCd": "string",
-  "ptoDelay": "string",
-  "appTransHistoryDesc": "text_general",
-  "appEntityStatus": "string",
-  "appLocationYear": "int",
-  "corrAddrCountryName": "string",
-  "appEarlyPubYear": "int",
-  "appExamName": "text_general",
-  "publicInd": "string",
-  "appClsSubClsFacet": "string",
-  "appExamNameFacet": "string",
-  "primaryInventorFirstName": "text_general",
-  "pctAppTypeFacet": "string",
-  "intlFilingDate": "date",
-  "primaryInventorFacet": "string",
-  "appEntityStatus_txt": "text_general",
-  "appGrpArtNumber": "text_ws",
-  "patentKindCode": "string",
-  "appFilingYear": "int",
-  "appAttrDockNumberFacet": "string",
-  "primaryInventorRegion": "text_general",
-  "firstNamedApplicantName": "text_general",
-  "appl_id_txt": "text_general",
-  "patentTermJson": "text_general",
-  "patentNumber": "text_general",
-  "LAST_MOD_TS_UTC": "date",
-  "appCls": "string",
-  "LAST_INSERT_TIME": "date",
-  "patentIssueYear": "int",
-  "appStatus_txt": "text_general",
-  "appCustNumberFacet": "string",
-  "appIntlPubDate": "date",
-  "appEarlyPubNumberFacet": "string",
-  "patentTitle": "text_general",
-  "applDelay": "string",
-  "applIdStr": "string",
-  "appPCTNumberFacet": "string",
-  "appAttrDockNumber": "text_general",
-  "primaryInventor": "text_general",
-  "appPubSeqNumber": "text_general",
-  "corrAddrStreetLineOne": "string",
-  "ipOfficeCode": "text_general",
-  "aDelay": "string",
-  "rankAndInventorsList_str": "string",
-  "appIntlPubNumberFacet": "string",
-  "publishDocJson": "text_general",
-  "rankAndInventorsAddressList": "string",
-  "corrAddrPostalCode": "string",
-  "appIntlPubYear": "int",
-  "primaryInventorLastName": "text_general",
-  "patentIssueDate": "date",
-  "appIntlPubNumber": "text_general",
-  "appControlNumberFacet": "string",
-  "corrAddrCustNo": "string",
-  "corrAddrCity": "string",
-  "appExamPrefrdName": "text_general",
-  "appConfrNumber": "int"
-}
+#print(requests.get(url='https://ped.uspto.gov/api/search-params').status_code)
+#exit()
+
+
+postJSON = {"searchText":"",
+"fq":["appFilingDate:[2019-01-01T00:00:00Z TO 2019-01-01T23:59:59Z]"],
+"fl":"*",
+"mm":"100%",
+"df":"patentTitle",
+"qf":"patentIssueDate appLocationYear appEarlyPubNumber applId appLocation appType appStatus_txt appConfrNumber appCustNumber appGrpArtNumber appCls appSubCls appEntityStatus_txt patentNumber patentTitle primaryInventor firstNamedApplicant firstNamedApplicantNameList wipoEarlyPubNumber pctAppType firstInventorFile appClsSubCls rankAndInventorsList",
+"facet":"false",
+"sort":"applId asc",
+"start":"0"}
+queryOne = requests.post(url, json=postJSON, headers={'accept' : 'application/json'})
+
+print(queryOne.status_code)
+print(queryOne.content)
+
+if queryOne.status_code != 200 :
+    exit("Non-200 OK response.")
+
+initialJSON = queryOne.json()
+initialJSON_dict = json.load(initialJSON)
+
+queryResult_dict = initialJSON_dict['queryResults']
+
+firstQueryID = initialJSON_dict['queryId']
+responseQueryID = queryResult_dict['queryId']
+print(firstQueryID)
+print(responseQueryID)
+
+
+
+
+# x = requests.post(url, json = myobj)
+
+
+
+
