@@ -24,6 +24,7 @@ def querymaker(year):
     return query
     
 def download_file(url):
+    print("Downloading...")
     local_filename = "resultsFile.zip"
     # NOTE the stream=True parameter below
     with requests.get(url, stream=True) as r:
@@ -113,6 +114,8 @@ while (jobStatus != "COMPLETED"):
 
 url = "https://ped.uspto.gov/api/queries/{}/download?format=JSON".format(firstQueryID)
 download_file(url)
+sleep(1.6)
+print("SUCCESS")
 
 # status == 400
 # while status != 302:
