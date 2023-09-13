@@ -11,7 +11,7 @@ def querymaker(year):
     variables = "patentIssueDate appLocationYear appEarlyPubNumber applId appLocation appType appStatus_txt appConfrNumber appCustNumber appGrpArtNumber appCls appSubCls appEntityStatus_txt patentNumber patentTitle primaryInventor firstNamedApplicant firstNamedApplicantNameList wipoEarlyPubNumber pctAppType firstInventorFile appClsSubCls rankAndInventorsList"
 
     query = {"searchText":"*:*",
-"fq":["patentIssueDate:[2019-01-01T00:00:00Z TO 2019-01-01T23:59:59Z]"],
+"fq":["patentIssueDate:[2019-01-01T00:00:00Z TO 2019-02-12T23:59:59Z]"],
 "fl":"*",
 "mm":"100%",
 "df":"patentTitle",
